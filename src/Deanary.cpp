@@ -61,6 +61,7 @@ void Deanery::loadGroupsFromFile() {
 }
 
 void Deanery::addRandomMarks() {
+    srand(time(0));
     for (const auto& group : groups_) {
         for (const auto& student : group->getStudents()) {
             student->addMarks(rand() % 11);
@@ -127,6 +128,7 @@ void Deanery::studentTransfer(const int64_t& id, const std::string& title) {
     student->getGroup()->deleteStudent(student);
     student->setGroup(new_group);
     new_group->addStudent(student);
+    std::cout << "Student successfully transferred" << std::endl;
 }
 
 void Deanery::deductionStudent() {
@@ -172,7 +174,7 @@ void Deanery::saveGroupsToFile() const {
     }
 
     for (const auto& group : groups_) {
-        file << group->getTitle() << " " << group->getSpec() << 
+        file << group->getTitle() << " " << group->getSpec() << " " <<
             group->getHead()->getFio() << std::endl;
     }
     std::cout << "Data saved in file groups.txt" << std::endl;
@@ -196,4 +198,39 @@ void Deanery::displayData() const {
 
 std::vector<Group*> Deanery::getGroups() const {
     return groups_;
+}
+
+void Deanery::saveStatistics() const {
+    std::ofstream file;
+    file.open("../output_statistics.txt");
+    if (!file.is_open()) {
+        std::cout << "File statistics.txt not found" << std::endl;
+        return;
+    }
+
+    for (const auto& group : groups_) {
+        file << "Group:\t\t\t" << group->getTitle() << std::endl;
+        file << "Spec:\t\t\t" << group->getSpec() << std::endl;
+        file << "Headman:\t\t" << group->getHead()->getFio() << std::endl;
+        file << "Average grade:\t" << group->getAverageGradeGroup() << std::endl << std::endl;
+
+        for (const auto& student : group->getStudents()) {
+            file << "[" << group->getTitle() << "] >> " 
+                << "Student:\t\t" << student->getFio() << std::endl;
+
+            auto print = [&file](const std::vector<uint16_t>& v) {
+                for (const auto& el : v) {file << el << " ";} file << std::endl;};
+
+            file << "[" << group->getTitle() << "] >> "
+                << "All grades:\t\t";
+            print(student->getMarks());
+
+            file << "[" << group->getTitle() << "] >> "
+                << "Average grade:\t" << student->getAverageGrade() << std::endl;
+            file << std::endl;
+        }
+        file << "-------------------" << std::endl;
+    }
+    std::cout << "Data saved in file statistics.txt" << std::endl;
+    file.close();
 }

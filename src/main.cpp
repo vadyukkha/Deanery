@@ -4,7 +4,7 @@ int main() {
     Deanery deanery;
     deanery.loadGroupsFromFile();
     deanery.loadStudentsFromFile();
-    
+
     deanery.displayData();
 
     deanery.addRandomMarks();
@@ -14,6 +14,8 @@ int main() {
     deanery.studentTransfer(1, "23КНТ6");
 
     deanery.deductionStudent();
+    
+    deanery.saveStatistics();
 
     deanery.saveStudentsToFile();
 
