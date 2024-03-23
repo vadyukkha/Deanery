@@ -6,6 +6,7 @@
 #include "Student.h"
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 
 class Deanery {
  public:
@@ -16,6 +17,7 @@ class Deanery {
    void loadGroupsFromFile();
    void addRandomMarks();
    void getStatistics() const;
+   void saveStatistics() const;
    void studentTransfer(const int64_t& id, const std::string& title);
    void deductionStudent();
    void saveStudentsToFile() const;
