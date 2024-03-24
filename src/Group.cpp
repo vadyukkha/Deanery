@@ -1,7 +1,7 @@
 #include "../include/Group.h"
 
-void Group::createGroup(const std::string& name, const std::string& spec) {
-    title_ = name;
+void Group::createGroup(const std::string& title, const std::string& spec) {
+    title_ = title;
     spec_ = spec;
 }
 
@@ -81,10 +81,18 @@ void Group::setSpec(const std::string& spec) {
     spec_ = spec;
 }
 
-void Group::setHead(Student* head) {
-    head_ = head;
+void Group::setHead(const Student* head) {
+    head_ = const_cast<Student*>(head);
 }
 
 void Group::setStudents(const std::vector<Student*>& students) {
     students_ = students;
+}
+
+Group& Group::operator=(const Group& group) {
+    title_ = group.title_;
+    spec_ = group.spec_;
+    students_ = group.students_;
+    head_ = group.head_;
+    return *this;
 }

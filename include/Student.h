@@ -14,35 +14,42 @@ class Student {
  public:
    Student() = default;
 
-   // main functions
+   /* main functions */
+   // создание студента с указанием ИД и ФИО
    void createStudent(const int64_t& id, const std::string& fio);
-   void enrollingStudent(Group* group) const;
+   // зачисление в группу студента
+   void enrollingStudent(Group* group);
+   // добавление оценки студенту
    void addMarks(const uint16_t& mark);
+   // добавление нескольких оценок студенту
    void addMarks(const std::vector<uint16_t>& marks);
+   // вычисление средней оценки студента
    double getAverageGrade() const;
 
-   // getters
+   /* getters */
+   // получение индивидуального номера студента
    int64_t getId() const;
+   // получение фамилии имени отчества студента
    std::string getFio() const;
+   // получение группы студента
    Group* getGroup() const;
+   // получение оценок студента
    std::vector<uint16_t> getMarks() const;
 
-   // setters
+   /* setters */
+   // установка группы студента
    void setGroup(Group* group);
+   // установка индивидуального номера студента
    void setId(const int64_t& id);
+   // установка фамилии имени отчества студента
    void setFio(const std::string& fio);
+   // установка оценок студента
    void setMarks(const std::vector<uint16_t>& marks);
 
-   // overerload operators
-   Student &operator=(const Student &student) {
-       id_ = student.id_;
-       fio_ = student.fio_;
-       group_ = student.group_;
-       marks_ = student.marks_;
-       return *this;
-   }
+   /* overerload operators */
+   Student &operator=(const Student &student);
 
- protected:
+ private:
    int64_t id_;
    std::string fio_;
    Group *group_;

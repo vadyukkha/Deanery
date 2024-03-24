@@ -5,7 +5,8 @@ void Student::createStudent(const int64_t& id, const std::string& fio) {
     fio_ = fio;
 }
 
-void Student::enrollingStudent(Group *group) const {
+void Student::enrollingStudent(Group *group) {
+    this->group_ = group;
     group->addStudent(this);
 }
 
@@ -54,4 +55,12 @@ void Student::setFio(const std::string& fio) {
 
 void Student::setMarks(const std::vector<uint16_t>& marks) {
     marks_ = marks;
+}
+
+Student& Student::operator=(const Student& student) {
+    id_ = student.id_;
+    fio_ = student.fio_;
+    group_ = student.group_;
+    marks_ = student.marks_;
+    return *this;
 }

@@ -200,9 +200,13 @@ std::vector<Group*> Deanery::getGroups() const {
     return groups_;
 }
 
+void Deanery::setGroup(const std::vector<Group*> groups) {
+    groups_ = groups;
+} 
+
 void Deanery::saveStatistics() const {
     std::ofstream file;
-    file.open("../output_statistics.txt");
+    file.open("../bd/output_statistics.txt");
     if (!file.is_open()) {
         std::cout << "File statistics.txt not found" << std::endl;
         return;
