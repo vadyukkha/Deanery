@@ -16,7 +16,8 @@ int main() {
         std::cout << "6. Transfer student to another group" << std::endl;
         std::cout << "7. Deduct students with low performance" << std::endl;
         std::cout << "8. Display data" << std::endl;
-        std::cout << "9. Exit" << std::endl;
+        std::cout << "9. Save data in JSON" << std::endl;
+        std::cout << "10. Exit" << std::endl;
         std::cout << "Enter your choice: ";
 
         uint16_t choice;
@@ -64,6 +65,10 @@ int main() {
                 deanery.displayData();
                 break;
             case 9:
+                deanery.saveDataInJSON();
+                std::cout << "Data saved successfully to data_save.json" << std::endl;
+                break;
+            case 10:
                 exitFlag = true;
                 break;
             default:

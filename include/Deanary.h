@@ -4,9 +4,12 @@
 
 #include "Group.h"
 #include "Student.h"
+#include "../include/json/include/nlohmann/json.hpp"
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
+
+using json = nlohmann::json;
 
 class Deanery {
  public:
@@ -33,6 +36,8 @@ class Deanery {
    void deductionStudent();
    // вывод данных на консоль
    void displayData() const;
+   // сохранение данных в json
+   void saveDataInJSON() const;
 
    /* getters */
    // получение групп

@@ -238,3 +238,30 @@ void Deanery::saveStatistics() const {
     std::cout << "Data saved in file statistics.txt" << std::endl;
     file.close();
 }
+
+void Deanery::saveDataInJSON() const {
+    json data_save_json;
+    for (const Group* group : groups_) {
+        json group_json;
+        group_json["name"] = group->getTitle();
+        group_json["spec"] = group->getSpec();
+        group_json["headman"] = group->getHead()->getFio();
+        group_json["students"] = json::array();
+        for (const Student* student : group->getStudents()) {
+            json student_json;
+            student_json["id"] = student->getId();
+            student_json["name"] = student->getFio();
+            student_json["group"] = student->getGroup()->getTitle();
+            student_json["avg"] = student->getAverageGrade();
+            student_json["marks"] = json::array();
+            for (int mark : student->getMarks()) {
+                student_json["marks"].push_back(mark);
+            }
+            group_json["students"].push_back(student_json);
+        }
+        data_save_json.push_back(group_json);
+    }
+    std::ofstream file_out("../bd/data_save.json");
+    file_out << data_save_json.dump(2);
+    file_out.close();
+}
