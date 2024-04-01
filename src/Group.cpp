@@ -23,22 +23,22 @@ void Group::electionHeadman() {
     }
 }
 
-bool Group::searchStudent(const std::string& fio) {
+Student* Group::searchStudent(const std::string& fio) {
     for (size_t i = 0; i < students_.size(); i++) {
         if (students_[i]->getFio() == fio) {
-            return true;
+            return students_[i];
         }
     }
-    return false;
+    return nullptr;
 }
 
-bool Group::searchStudent(const int64_t& id) {
+Student* Group::searchStudent(const int64_t& id) {
     for (size_t i = 0; i < students_.size(); i++) {
         if (students_[i]->getId() == id) {
-            return true;
+            return students_[i];
         }
     }
-    return false;
+    return nullptr;
 }
 
 double Group::getAverageGradeGroup() {

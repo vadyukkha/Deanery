@@ -2,6 +2,15 @@
 #include <iostream>
 #include "../include/Group.h"
 
+void output(const Student* student) {
+    if (student != nullptr) {
+        std::cout << student->getFio() << std::endl;
+    }
+    else {
+        std::cout << "Undefinded" << std::endl;
+    }
+}
+
 int main() {
     Group group;
     group.setSpec("ИМИКН");
@@ -43,12 +52,18 @@ int main() {
     std::cout << "Group spec: " << group2.getSpec() << std::endl;
     std::cout << "Group head: " << group2.getHead()->getFio() << std::endl;
     std::cout << "Group students: " << std::endl;
-    std::cout << group2.searchStudent("Ivanov Ivan Ivanovich") << std::endl;
-    std::cout << group2.searchStudent("Petrov Petr Petrovich") << std::endl;
-    std::cout << group2.searchStudent("Sidorov Sidor Sidorovich") << std::endl;
-    std::cout << group2.searchStudent(1) << std::endl;
-    std::cout << group2.searchStudent(2) << std::endl;
-    std::cout << group2.searchStudent(3) << std::endl;
+    Student* find_student = group2.searchStudent("Ivanov Ivan Ivanovich");
+    output(find_student);
+    find_student = group2.searchStudent("Petrov Petr Petrovich");
+    output(find_student);
+    find_student = group2.searchStudent("Sidorov Sidor Sidorovich");
+    output(find_student);
+    find_student = group2.searchStudent(1);
+    output(find_student);
+    find_student = group2.searchStudent(2);
+    output(find_student);
+    find_student = group2.searchStudent(3);
+    output(find_student);
     
     return 0;
 }

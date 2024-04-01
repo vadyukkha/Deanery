@@ -22,9 +22,9 @@ class Group {
     // избрание старосты
     void electionHeadman();
     // поиск студента по ФИО
-    bool searchStudent(const std::string& fio);
+    Student* searchStudent(const std::string& fio);
     // поиск студента по Ид
-    bool searchStudent(const int64_t& id);
+    Student* searchStudent(const int64_t& id);
     // вычисление среднего балла в группе
     double getAverageGradeGroup();
     // исключение студента из группы
