@@ -1,3 +1,4 @@
+// Copyright 2024 by Contributors
 #include "../include/Student.h"
 
 void Student::createStudent(const int64_t& id, const std::string& fio) {
@@ -21,8 +22,8 @@ void Student::addMarks(const std::vector<uint16_t>& marks) {
 }
 
 double Student::getAverageGrade() const {
-    double avg = std::accumulate(marks_.begin(), marks_.end(), 0.0) / marks_.size();
-    return avg;
+    double avg = std::accumulate(marks_.begin(), marks_.end(), 0.0);
+    return avg / marks_.size();
 }
 
 int64_t Student::getId() const {

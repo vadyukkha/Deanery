@@ -8,13 +8,13 @@ help: # Show help for each of the Makefile recipes.
 	@printf "\n"
 
 deanery: test_deanery.cpp # Build test_deanery file
-	g++ -std=c++20 -Iinclude ../src/Deanary.cpp ../src/Group.cpp ../src/Student.cpp test_deanery.cpp -O3 -o test_deanery
+	g++ -std=c++20 -I ../include/json/include ../src/Deanary.cpp ../src/Group.cpp ../src/Student.cpp test_deanery.cpp -O3 -o test_deanery
 
 student: test_student.cpp # Build test_student file
-	g++ -std=c++20 -Iinclude ../src/Deanary.cpp ../src/Group.cpp ../src/Student.cpp test_student.cpp -O3 -o test_student
+	g++ -std=c++20 -I ../include/json/include ../src/Deanary.cpp ../src/Group.cpp ../src/Student.cpp test_student.cpp -O3 -o test_student
 
 group: test_group.cpp # Build test_group file
-	g++ -std=c++20 -Iinclude ../src/Deanary.cpp ../src/Group.cpp ../src/Student.cpp test_group.cpp -O3 -o test_group
+	g++ -std=c++20 -I ../include/json/include ../src/Deanary.cpp ../src/Group.cpp ../src/Student.cpp test_group.cpp -O3 -o test_group
 
 clean: # Delete all builded files
 	rm -f deanery student group 

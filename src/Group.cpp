@@ -1,3 +1,4 @@
+// Copyright 2024 by Contributors
 #include "../include/Group.h"
 
 void Group::createGroup(const std::string& title, const std::string& spec) {

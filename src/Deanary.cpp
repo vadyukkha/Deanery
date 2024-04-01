@@ -1,3 +1,4 @@
+// Copyright 2024 by Contributors
 #include "../include/Deanary.h"
 
 void Deanery::loadStudentsFromFile() {
@@ -12,7 +13,7 @@ void Deanery::loadStudentsFromFile() {
     std::string fio, title, name, surname, patronymic;
     int64_t id;
 
-    while(std::getline(file, line)) {
+    while (std::getline(file, line)) {
         std::istringstream iss(line);
         iss >> id >> surname >> name >> patronymic >> title;
         fio = surname + " " + name + " " + patronymic;
@@ -28,6 +29,9 @@ void Deanery::loadStudentsFromFile() {
                 student->setGroup(group);
                 student->setMarks(marks);
                 group->addStudent(student);
+                if (group->getHead() == student) {
+                    group->getHead()->setId(id);
+                }
                 break;
             }
         }
@@ -61,10 +65,10 @@ void Deanery::loadGroupsFromFile() {
 }
 
 void Deanery::addRandomMarks() {
-    srand(time(0));
+    unsigned int seed = time(0);
     for (const auto& group : groups_) {
         for (const auto& student : group->getStudents()) {
-            student->addMarks(rand() % 11);
+            student->addMarks(rand_r(&seed) % 11);
         }
     }
 }
@@ -72,25 +76,32 @@ void Deanery::addRandomMarks() {
 void Deanery::getStatistics() const {
     std::cout << "Statistics:" << std::endl;
     for (const auto& group : groups_) {
-        std::cout << "Group:\t\t\t" << group->getTitle() << std::endl;
-        std::cout << "Spec:\t\t\t" << group->getSpec() << std::endl;
-        std::cout << "Headman:\t\t" << group->getHead()->getFio() << std::endl;
-        std::cout << "Average grade:\t" << group->getAverageGradeGroup() << std::endl << std::endl;
+        std::cout << "Group:\t\t\t"
+            << group->getTitle() << std::endl;
+        std::cout << "Spec:\t\t\t"
+            << group->getSpec() << std::endl;
+        std::cout << "Headman:\t\t"
+            << group->getHead()->getFio() << std::endl;
+        std::cout << "Average grade:\t"
+            << group->getAverageGradeGroup() << std::endl << std::endl;
 
         for (const auto& student : group->getStudents()) {
-            std::cout << "[" << group->getTitle() << "] >> " 
+            std::cout << "[" << group->getTitle() << "] >> "
                 << "Student:\t\t" << student->getFio() << std::endl;
 
             auto print = [](const std::vector<uint16_t>& v) {
-                for (const auto& el : v) {std::cout << el << " ";} std::cout << std::endl;};
+                for (const auto& el : v)
+                    {std::cout << el << " ";}
+                std::cout << std::endl;
+            };
 
             std::cout << "[" << group->getTitle() << "] >> "
                 << "All grades:\t\t";
             print(student->getMarks());
 
             std::cout << "[" << group->getTitle() << "] >> "
-                << "Average grade:\t" << student->getAverageGrade() << std::endl;
-            std::cout << std::endl;
+                << "Average grade:\t" << student->getAverageGrade()
+                << std::endl << std::endl;
         }
         std::cout << "-------------------" << std::endl;
     }
@@ -154,10 +165,13 @@ void Deanery::saveStudentsToFile() const {
 
     for (const auto& group : groups_) {
         for (const auto& student : group->getStudents()) {
-
-            file << student->getId() << " " << student->getFio() << " " 
+            file << student->getId() << " " << student->getFio() << " "
                 << student->getGroup()->getTitle() << " ";
-            auto saveMarksInFile = [&file](const std::vector<uint16_t>& v) {for (const auto& el : v) {file << el << " ";} file << std::endl;};
+            auto saveMarksInFile = [&file](const std::vector<uint16_t>& v){
+                for (const auto& el : v)
+                    {file << el << " ";}
+                file << std::endl;
+            };
             saveMarksInFile(student->getMarks());
         }
     }
@@ -186,10 +200,13 @@ void Deanery::displayData() const {
     for (const auto& group : groups_) {
         std::cout << "Title of Group:\t" << group->getTitle() << std::endl;
         for (const auto& student : group->getStudents()) {
-
-            std::cout << student->getId() << " " << student->getFio() << " " 
+            std::cout << student->getId() << " " << student->getFio() << " "
                 << student->getGroup()->getTitle() << " ";
-            auto printMarks = [](const std::vector<uint16_t>& v) {for (const auto& el : v) {std::cout << el << " ";} std::cout << std::endl;};
+            auto printMarks = [](const std::vector<uint16_t>& v) {
+                for (const auto& el : v)
+                    {std::cout << el << " ";}
+                std::cout << std::endl;
+            };
             printMarks(student->getMarks());
         }
         std::cout << std::endl;
@@ -202,7 +219,7 @@ std::vector<Group*> Deanery::getGroups() const {
 
 void Deanery::setGroup(const std::vector<Group*> groups) {
     groups_ = groups;
-} 
+}
 
 void Deanery::saveStatistics() const {
     std::ofstream file;
@@ -213,25 +230,32 @@ void Deanery::saveStatistics() const {
     }
 
     for (const auto& group : groups_) {
-        file << "Group:\t\t\t" << group->getTitle() << std::endl;
-        file << "Spec:\t\t\t" << group->getSpec() << std::endl;
-        file << "Headman:\t\t" << group->getHead()->getFio() << std::endl;
-        file << "Average grade:\t" << group->getAverageGradeGroup() << std::endl << std::endl;
+        file << "Group:\t\t\t"
+            << group->getTitle() << std::endl;
+        file << "Spec:\t\t\t"
+            << group->getSpec() << std::endl;
+        file << "Headman:\t\t"
+            << group->getHead()->getFio() << std::endl;
+        file << "Average grade:\t"
+            << group->getAverageGradeGroup() << std::endl << std::endl;
 
         for (const auto& student : group->getStudents()) {
-            file << "[" << group->getTitle() << "] >> " 
+            file << "[" << group->getTitle() << "] >> "
                 << "Student:\t\t" << student->getFio() << std::endl;
 
             auto print = [&file](const std::vector<uint16_t>& v) {
-                for (const auto& el : v) {file << el << " ";} file << std::endl;};
+                for (const auto& el : v)
+                    {file << el << " ";}
+                file << std::endl;
+            };
 
             file << "[" << group->getTitle() << "] >> "
                 << "All grades:\t\t";
             print(student->getMarks());
 
             file << "[" << group->getTitle() << "] >> "
-                << "Average grade:\t" << student->getAverageGrade() << std::endl;
-            file << std::endl;
+                << "Average grade:\t" << student->getAverageGrade()
+                << std::endl << std::endl;
         }
         file << "-------------------" << std::endl;
     }

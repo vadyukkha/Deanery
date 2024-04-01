@@ -1,3 +1,4 @@
+// Copyright 2024 by Contributors
 #include <iostream>
 #include <limits>
 #include "../include/Deanary.h"
