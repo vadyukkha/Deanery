@@ -10,14 +10,14 @@ void Group::addStudent(const Student* student) {
     students_.push_back(const_cast<Student*>(student));
 }
 
-void Group::electionHeadman() {
+void Group::chooseHead() {
     if (students_.empty()) {
         std::cout << "Group is empty" << std::endl;
         return;
     }
     head_ = students_[0];
     for (size_t i = 1; i < students_.size(); i++) {
-        if (students_[i]->getAverageGrade() > head_->getAverageGrade()) {
+        if (students_[i]->getAverageMark() > head_->getAverageMark()) {
             head_ = students_[i];
         }
     }
@@ -44,12 +44,12 @@ Student* Group::searchStudent(const int64_t& id) {
 double Group::getAverageGradeGroup() {
     double avg = 0;
     for (size_t i = 0; i < students_.size(); i++) {
-        avg += students_[i]->getAverageGrade();
+        avg += students_[i]->getAverageMark();
     }
     return avg / students_.size();
 }
 
-void Group::deleteStudent(const Student* student) {
+void Group::removeStudent(const Student* student) {
     for (size_t i = 0; i < students_.size(); i++) {
         if (students_[i] == student) {
             students_.erase(students_.begin() + i);
@@ -96,4 +96,8 @@ Group& Group::operator=(const Group& group) {
     students_ = group.students_;
     head_ = group.head_;
     return *this;
+}
+
+bool Group::isEmpty() const {
+    return students_.empty();
 }

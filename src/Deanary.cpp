@@ -64,7 +64,7 @@ void Deanery::loadGroupsFromFile() {
     file.close();
 }
 
-void Deanery::addRandomMarks() {
+void Deanery::addRandomMarksToAll() {
     unsigned int seed = time(0);
     for (const auto& group : groups_) {
         for (const auto& student : group->getStudents()) {
@@ -100,14 +100,14 @@ void Deanery::getStatistics() const {
             print(student->getMarks());
 
             std::cout << "[" << group->getTitle() << "] >> "
-                << "Average grade:\t" << student->getAverageGrade()
+                << "Average grade:\t" << student->getAverageMark()
                 << std::endl << std::endl;
         }
         std::cout << "-------------------" << std::endl;
     }
 }
 
-void Deanery::studentTransfer(const int64_t& id, const std::string& title) {
+void Deanery::moveStudents(const int64_t& id, const std::string& title) {
     Student *student = nullptr;
     for (const auto& group : groups_) {
         for (const auto& st : group->getStudents()) {
@@ -136,19 +136,20 @@ void Deanery::studentTransfer(const int64_t& id, const std::string& title) {
         return;
     }
 
-    student->getGroup()->deleteStudent(student);
+    student->getGroup()->removeStudent(student);
     student->setGroup(new_group);
     new_group->addStudent(student);
     std::cout << "Student successfully transferred" << std::endl;
 }
 
-void Deanery::deductionStudent() {
+void Deanery::fireStudents() {
     uint32_t count = 0;
     for (const auto& group : groups_) {
         for (const auto& student : group->getStudents()) {
-            if (student->getAverageGrade() < 4.0) {
-                group->deleteStudent(student);
+            if (student->getAverageMark() < 4.0) {
+                group->removeStudent(student);
                 count++;
+                std::cout << student->getFio() << " was removed." << std::endl;
             }
         }
     }
@@ -254,7 +255,7 @@ void Deanery::saveStatistics() const {
             print(student->getMarks());
 
             file << "[" << group->getTitle() << "] >> "
-                << "Average grade:\t" << student->getAverageGrade()
+                << "Average grade:\t" << student->getAverageMark()
                 << std::endl << std::endl;
         }
         file << "-------------------" << std::endl;
@@ -276,7 +277,7 @@ void Deanery::saveDataInJSON() const {
             student_json["id"] = student->getId();
             student_json["name"] = student->getFio();
             student_json["group"] = student->getGroup()->getTitle();
-            student_json["avg"] = student->getAverageGrade();
+            student_json["avg"] = student->getAverageMark();
             student_json["marks"] = json::array();
             for (int mark : student->getMarks()) {
                 student_json["marks"].push_back(mark);

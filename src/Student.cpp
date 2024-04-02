@@ -6,7 +6,7 @@ void Student::createStudent(const int64_t& id, const std::string& fio) {
     fio_ = fio;
 }
 
-void Student::enrollingStudent(Group *group) {
+void Student::addToGroup(Group *group) {
     this->group_ = group;
     group->addStudent(this);
 }
@@ -21,7 +21,7 @@ void Student::addMarks(const std::vector<uint16_t>& marks) {
     }
 }
 
-double Student::getAverageGrade() const {
+double Student::getAverageMark() const {
     double avg = std::accumulate(marks_.begin(), marks_.end(), 0.0);
     return avg / marks_.size();
 }
@@ -64,4 +64,8 @@ Student& Student::operator=(const Student& student) {
     group_ = student.group_;
     marks_ = student.marks_;
     return *this;
+}
+
+bool Student::isHeadOfGroup() const {
+    return (this == group_->getHead());
 }

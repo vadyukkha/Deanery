@@ -20,7 +20,7 @@ class Group {
     // добавление студента
     void addStudent(const Student* student);
     // избрание старосты
-    void electionHeadman();
+    void chooseHead();
     // поиск студента по ФИО
     Student* searchStudent(const std::string& fio);
     // поиск студента по Ид
@@ -28,7 +28,9 @@ class Group {
     // вычисление среднего балла в группе
     double getAverageGradeGroup();
     // исключение студента из группы
-    void deleteStudent(const Student* student);
+    void removeStudent(const Student* student);
+    // проверка на пустоту
+    bool isEmpty() const;
 
     /* getters */
     // получение названия группы
@@ -38,7 +40,7 @@ class Group {
     // получение старосты группы
     Student* getHead() const;
     // получение всех студентов группы
-    std::vector<Student*> getStudents() const;
+    std::vector<Student*> getStudents() const;    
 
     /* setters */
     // установка названия группы

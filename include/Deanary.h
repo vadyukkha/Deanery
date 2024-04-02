@@ -32,11 +32,11 @@ class Deanery {
     // получение статистики по успеваемости студентов с сохранение в файл
     void saveStatistics() const;
     // добавление случайных оценок студентам
-    void addRandomMarks();
+    void addRandomMarksToAll();
     // перевод студентов из группы в группу
-    void studentTransfer(const int64_t& id, const std::string& title);
+    void moveStudents(const int64_t& id, const std::string& title);
     // отчисление студентов за неуспеваемость
-    void deductionStudent();
+    void fireStudents();
     // вывод данных на консоль
     void displayData() const;
     // сохранение данных в json

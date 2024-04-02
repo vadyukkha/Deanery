@@ -20,9 +20,9 @@ int main() {
     student1.createStudent(1, "Ivanov Ivan Ivanovich");
     student2.createStudent(2, "Petrov Petr Petrovich");
     student3.createStudent(3, "Sidorov Sidor Sidorovich");
-    student1.enrollingStudent(&group);
-    student2.enrollingStudent(&group);
-    student3.enrollingStudent(&group);
+    student1.addToGroup(&group);
+    student2.addToGroup(&group);
+    student3.addToGroup(&group);
     student1.addMarks({5, 4, 3, 5, 4, 5, 3, 4, 5, 4});
     student2.addMarks({4, 3, 5, 4, 5, 3, 4, 5, 4, 5});
     student3.addMarks({3, 4, 5, 3, 4, 5, 4, 5, 4, 5});
@@ -45,8 +45,8 @@ int main() {
     group2.addStudent(&student1);
     group2.addStudent(&student2);
     group2.addStudent(&student3);
-    group2.electionHeadman();
-    group2.deleteStudent(&student2);
+    group2.chooseHead();
+    group2.removeStudent(&student2);
     
     std::cout << "Group title: " << group2.getTitle() << std::endl;
     std::cout << "Group spec: " << group2.getSpec() << std::endl;

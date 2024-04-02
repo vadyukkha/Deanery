@@ -20,11 +20,11 @@ int main() {
         std::cout << mark << " ";
     }
     std::cout << std::endl;
-    std::cout << "Student Average Grade: " << student.getAverageGrade() << std::endl;
+    std::cout << "Student Average Grade: " << student.getAverageMark() << std::endl;
 
     Student student2;
     student2.createStudent(2, "Petrov Petr Petrovich");
-    student2.enrollingStudent(p_group);
+    student2.addToGroup(p_group);
     student2.addMarks({4, 3, 5, 4, 5, 3, 4, 5, 4, 5});
 
     std::cout << "Student ID: " << student2.getId() << std::endl;
@@ -35,7 +35,10 @@ int main() {
         std::cout << mark << " ";
     }
     std::cout << std::endl;
-    std::cout << "Student Average Grade: " << student2.getAverageGrade() << std::endl;
+    std::cout << "Student Average Grade: " << student2.getAverageMark() << std::endl;
+
+    std::cout << "Is headman? " << student.isHeadOfGroup() << std::endl;
+    std::cout << "Is headman? " << student2.isHeadOfGroup() << std::endl;
 
     return 0;
 }

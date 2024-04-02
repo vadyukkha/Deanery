@@ -19,13 +19,15 @@ class Student {
     // создание студента с указанием ИД и ФИО
     void createStudent(const int64_t& id, const std::string& fio);
     // зачисление в группу студента
-    void enrollingStudent(Group* group);
+    void addToGroup(Group* group);
     // добавление оценки студенту
     void addMarks(const uint16_t& mark);
     // добавление нескольких оценок студенту
     void addMarks(const std::vector<uint16_t>& marks);
     // вычисление средней оценки студента
-    double getAverageGrade() const;
+    double getAverageMark() const;
+    // проверка студента на старосту
+    bool isHeadOfGroup() const;
 
     /* getters */
     // получение индивидуального номера студента
