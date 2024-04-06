@@ -8,13 +8,13 @@ int main() {
 
     deanery.displayData();
 
-    deanery.addRandomMarks();
+    deanery.addRandomMarksToAll();
 
     deanery.getStatistics();
 
-    deanery.studentTransfer(1, "23КНТ6");
+    deanery.moveStudents(1, "23КНТ6");
 
-    deanery.deductionStudent();
+    deanery.fireStudents();
     
     deanery.saveStatistics();
 

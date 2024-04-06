@@ -17,6 +17,7 @@ using json = nlohmann::json;
 class Deanery {
  public:
     Deanery() = default;
+    ~Deanery() = default;
 
     /* main functions */
     // создание студентов на основе данных из файла

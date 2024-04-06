@@ -14,6 +14,7 @@ class Group;
 class Student {
  public:
     Student() = default;
+    ~Student() = default;
 
     /* main functions */
     // создание студента с указанием ИД и ФИО

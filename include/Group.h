@@ -13,6 +13,7 @@ class Student;
 class Group {
  public:
     Group() = default;
+    ~Group() = default;
 
     /* main functions */
     // создание группы с указанием названия
