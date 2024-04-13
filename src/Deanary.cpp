@@ -1,4 +1,6 @@
 // Copyright 2024 by Contributors
+#include "../include/Student.h"
+#include "../include/Group.h"
 #include "../include/Deanary.h"
 
 void Deanery::loadStudentsFromFile() {

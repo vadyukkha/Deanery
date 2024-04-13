@@ -6,8 +6,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <memory>
 
-#include "Student.h"
 class Student;
 
 class Group {
@@ -41,7 +41,7 @@ class Group {
     // получение старосты группы
     Student* getHead() const;
     // получение всех студентов группы
-    std::vector<Student*> getStudents() const;    
+    std::vector<Student*> getStudents() const;
 
     /* setters */
     // установка названия группы

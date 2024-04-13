@@ -8,7 +8,7 @@ help: # Show help for each of the Makefile recipes.
 	@printf "\n"
 
 main: main.cpp # Build main file
-	g++ -std=c++20 Deanary.cpp Group.cpp Student.cpp main.cpp -O3 -o main -I ../include/json/include
+	g++ -std=c++20 Deanary.cpp Controller.cpp Group.cpp Student.cpp main.cpp -O3 -o main -I ../include/json/include
 
 clean: # Delete all builded files
 	rm -f main

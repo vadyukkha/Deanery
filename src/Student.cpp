@@ -1,4 +1,5 @@
 // Copyright 2024 by Contributors
+#include "../include/Group.h"
 #include "../include/Student.h"
 
 void Student::createStudent(const int64_t& id, const std::string& fio) {

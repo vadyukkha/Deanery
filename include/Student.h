@@ -8,7 +8,6 @@
 #include <string>
 #include <numeric>
 
-#include "Group.h"
 class Group;
 
 class Student {

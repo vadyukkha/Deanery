@@ -3,14 +3,16 @@
 #ifndef INCLUDE_DEANARY_H
 #define INCLUDE_DEANARY_H
 
-#include "Group.h"
-#include "Student.h"
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
 #include <string>
+#include <ctime>
 #include <vector>
 #include "../include/json/include/nlohmann/json.hpp"
+
+class Group;
+class Student;
 
 using json = nlohmann::json;
 
